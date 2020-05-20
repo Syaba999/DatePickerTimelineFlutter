@@ -32,8 +32,8 @@ class DateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      highlightColor: disabled ? Colors.transparent : Theme.of(context).highlightColor,
+    return _dateContainer(
+      disabled,
       child: Container(
         width: width,
         margin: EdgeInsets.all(3.0),
@@ -72,6 +72,19 @@ class DateWidget extends StatelessWidget {
                 onDateSelected(this.date);
               }
             },
+    );
+  }
+
+  Widget _dateContainer(bool disabled, {Widget child, Function() onTap}) {
+    if (disabled) {
+      return GestureDetector(
+        child: child,
+        onTap: onTap,
+      );
+    }
+    return InkWell(
+      child: child,
+      onTap: onTap,
     );
   }
 }
