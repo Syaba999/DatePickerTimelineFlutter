@@ -74,8 +74,6 @@ class DatePicker extends StatefulWidget {
 class _DatePickerState extends State<DatePicker> {
   DateTime _currentDate;
 
-  ScrollController _controller = ScrollController();
-
   TextStyle selectedDateStyle;
   TextStyle selectedMonthStyle;
   TextStyle selectedDayStyle;
@@ -121,7 +119,7 @@ class _DatePickerState extends State<DatePicker> {
       child: ListView.builder(
         itemCount: widget.daysCount,
         scrollDirection: Axis.horizontal,
-        controller: controller,
+        controller: widget.controller,
         itemBuilder: (context, index) {
           // get the date object based on the index position
           // if widget.startDate is null then use the initialDateValue
@@ -180,7 +178,7 @@ class DatePickerController {
         'DatePickerController is not attached to any DatePicker View.');
 
     // jump to the current Date
-    _datePickerState.controller
+    _datePickerState.widget.controller
         .jumpTo(_calculateDateOffset(_datePickerState._currentDate));
   }
 
@@ -191,7 +189,7 @@ class DatePickerController {
         'DatePickerController is not attached to any DatePicker View.');
 
     // animate to the current date
-    _datePickerState.controller.animateTo(
+    _datePickerState.widget.controller.animateTo(
         _calculateDateOffset(_datePickerState._currentDate),
         duration: duration,
         curve: curve);
