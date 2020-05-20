@@ -47,7 +47,7 @@ class DatePicker extends StatefulWidget {
   /// Locale for the calendar default: en_us
   final String locale;
 
-  final ScrollController controller;
+  final ScrollController scrollController;
 
   DatePicker(
     this.startDate, {
@@ -64,7 +64,7 @@ class DatePicker extends StatefulWidget {
     this.daysCount = 500,
     this.onDateChange,
     this.locale = "en_US",
-        this.controller = ScrollController(),
+        this.scrollController = ScrollController(),
   }) : super(key: key);
 
   @override
@@ -119,7 +119,7 @@ class _DatePickerState extends State<DatePicker> {
       child: ListView.builder(
         itemCount: widget.daysCount,
         scrollDirection: Axis.horizontal,
-        controller: widget.controller,
+        controller: widget.scrollController,
         itemBuilder: (context, index) {
           // get the date object based on the index position
           // if widget.startDate is null then use the initialDateValue
@@ -178,7 +178,7 @@ class DatePickerController {
         'DatePickerController is not attached to any DatePicker View.');
 
     // jump to the current Date
-    _datePickerState.widget.controller
+    _datePickerState.widget.scrollController
         .jumpTo(_calculateDateOffset(_datePickerState._currentDate));
   }
 
@@ -189,7 +189,7 @@ class DatePickerController {
         'DatePickerController is not attached to any DatePicker View.');
 
     // animate to the current date
-    _datePickerState.widget.controller.animateTo(
+    _datePickerState.widget.scrollController.animateTo(
         _calculateDateOffset(_datePickerState._currentDate),
         duration: duration,
         curve: curve);
