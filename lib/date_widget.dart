@@ -16,6 +16,7 @@ class DateWidget extends StatelessWidget {
   final Color selectionColor;
   final DateSelectionCallback onDateSelected;
   final String locale;
+  final bool disabled;
 
   DateWidget(
       {@required this.date,
@@ -25,7 +26,7 @@ class DateWidget extends StatelessWidget {
       @required this.selectionColor,
       this.width,
       this.onDateSelected,
-      this.locale,
+      this.locale, this.disabled = false,
       });
 
   @override
@@ -54,7 +55,7 @@ class DateWidget extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {
+      onTap: disabled ? null : () {
         // Check if onDateSelected is not null
         if (onDateSelected != null) {
           // Call the onDateSelected Function
