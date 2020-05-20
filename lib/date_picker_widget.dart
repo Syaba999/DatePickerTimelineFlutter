@@ -139,9 +139,10 @@ class _DatePickerState extends State<DatePicker> {
 
           // Return the Date Widget
 
-          bool isEnabled = widget.enabledDates?.contains(date) ?? true;
+          bool disabled = !(widget.enabledDates?.contains(date) ?? true);
 
           return DateWidget(
+            disabled: disabled,
             date: date,
             monthTextStyle:
                 isSelected ? selectedMonthStyle : widget.monthTextStyle,
@@ -152,7 +153,7 @@ class _DatePickerState extends State<DatePicker> {
             locale: widget.locale,
             selectionColor:
                 isSelected ? widget.selectionColor : Colors.transparent,
-            onDateSelected: !isEnabled
+            onDateSelected: disabled
                 ? null
                 : (selectedDate) {
                     // A date is selected
