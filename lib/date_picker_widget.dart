@@ -51,6 +51,8 @@ class DatePicker extends StatefulWidget {
 
   final List<DateTime> enabledDates;
 
+  final Color disabledTextColor;
+
   DatePicker(
     this.startDate, {
     Key key,
@@ -68,6 +70,7 @@ class DatePicker extends StatefulWidget {
     this.locale = "en_US",
     this.scrollController,
     this.enabledDates,
+    this.disabledTextColor,
   }) : super(key: key);
 
   @override
@@ -145,10 +148,10 @@ class _DatePickerState extends State<DatePicker> {
             disabled: disabled,
             date: date,
             monthTextStyle:
-                isSelected ? selectedMonthStyle : widget.monthTextStyle,
+                isSelected ? selectedMonthStyle : disabled && widget.disabledTextColor != null ? widget.monthTextStyle.copyWith(color: widget.disabledTextColor) : widget.monthTextStyle,
             dateTextStyle:
-                isSelected ? selectedDateStyle : widget.dateTextStyle,
-            dayTextStyle: isSelected ? selectedDayStyle : widget.dayTextStyle,
+                isSelected ? selectedDateStyle : disabled && widget.disabledTextColor != null ? widget.dateTextStyle.copyWith(color: widget.disabledTextColor) : widget.dateTextStyle,
+            dayTextStyle: isSelected ? selectedDayStyle : disabled && widget.disabledTextColor != null ? widget.dayTextStyle.copyWith(color: widget.disabledTextColor) : widget.dayTextStyle,
             width: widget.width,
             locale: widget.locale,
             selectionColor:
