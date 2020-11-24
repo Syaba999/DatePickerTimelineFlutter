@@ -53,6 +53,8 @@ class DatePicker extends StatefulWidget {
 
   final Color disabledTextColor;
 
+  final DateTime selectedDate;
+
   DatePicker(
     this.startDate, {
     Key key,
@@ -70,7 +72,7 @@ class DatePicker extends StatefulWidget {
     this.locale = "en_US",
     this.scrollController,
     this.enabledDates,
-    this.disabledTextColor,
+    this.disabledTextColor, this.selectedDate,
   }) : super(key: key);
 
   @override
@@ -137,8 +139,13 @@ class _DatePickerState extends State<DatePicker> {
           date = new DateTime(_date.year, _date.month, _date.day);
 
           // Check if this date is the one that is currently selected
-          bool isSelected =
-              _currentDate != null ? _compareDate(date, _currentDate) : false;
+          bool isSelected;
+          if (widget.selectedDate == null) {
+            isSelected = _currentDate != null ? _compareDate(date, _currentDate) : false;
+          } else {
+            isSelected = _compareDate(date, widget.selectedDate);
+          }
+
 
           // Return the Date Widget
 
