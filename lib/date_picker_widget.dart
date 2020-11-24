@@ -72,7 +72,8 @@ class DatePicker extends StatefulWidget {
     this.locale = "en_US",
     this.scrollController,
     this.enabledDates,
-    this.disabledTextColor, this.selectedDate,
+    this.disabledTextColor,
+    this.selectedDate,
   }) : super(key: key);
 
   @override
@@ -141,11 +142,11 @@ class _DatePickerState extends State<DatePicker> {
           // Check if this date is the one that is currently selected
           bool isSelected;
           if (widget.selectedDate == null) {
-            isSelected = _currentDate != null ? _compareDate(date, _currentDate) : false;
+            isSelected =
+                _currentDate != null ? _compareDate(date, _currentDate) : false;
           } else {
             isSelected = _compareDate(date, widget.selectedDate);
           }
-
 
           // Return the Date Widget
 
@@ -154,11 +155,24 @@ class _DatePickerState extends State<DatePicker> {
           return DateWidget(
             disabled: disabled,
             date: date,
-            monthTextStyle:
-                isSelected ? selectedMonthStyle : disabled && widget.disabledTextColor != null ? widget.monthTextStyle.copyWith(color: widget.disabledTextColor) : widget.monthTextStyle,
-            dateTextStyle:
-                isSelected ? selectedDateStyle : disabled && widget.disabledTextColor != null ? widget.dateTextStyle.copyWith(color: widget.disabledTextColor) : widget.dateTextStyle,
-            dayTextStyle: isSelected ? selectedDayStyle : disabled && widget.disabledTextColor != null ? widget.dayTextStyle.copyWith(color: widget.disabledTextColor) : widget.dayTextStyle,
+            monthTextStyle: isSelected
+                ? selectedMonthStyle
+                : disabled && widget.disabledTextColor != null
+                    ? widget.monthTextStyle
+                        .copyWith(color: widget.disabledTextColor)
+                    : widget.monthTextStyle,
+            dateTextStyle: isSelected
+                ? selectedDateStyle
+                : disabled && widget.disabledTextColor != null
+                    ? widget.dateTextStyle
+                        .copyWith(color: widget.disabledTextColor)
+                    : widget.dateTextStyle,
+            dayTextStyle: isSelected
+                ? selectedDayStyle
+                : disabled && widget.disabledTextColor != null
+                    ? widget.dayTextStyle
+                        .copyWith(color: widget.disabledTextColor)
+                    : widget.dayTextStyle,
             width: widget.width,
             locale: widget.locale,
             selectionColor:
